@@ -7,10 +7,12 @@ class HomeDetail extends StatelessWidget {
       appBar: AppBar(
         title: Text("Home Detail"),
       ),
-      body: Container(
-        child: Center(
-          child: Text("HomeDetail ==>>>"),
+      body: ListView.builder(
+        itemBuilder: (context, index) => ListTile(
+          leading: Text("${index + 1}"),
+          title: Text("HomeDetail => Product ${index + 1}"),
         ),
+        itemCount: 1000,
       ),
     );
   }

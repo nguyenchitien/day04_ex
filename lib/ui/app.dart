@@ -1,4 +1,10 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:day04_ex/navigator/add_navigator.dart';
+import 'package:day04_ex/navigator/favorite_navigator.dart';
+import 'package:day04_ex/navigator/home_navigator.dart';
+import 'package:day04_ex/navigator/profile_navigator.dart';
+import 'package:day04_ex/navigator/search_navigator.dart';
+import 'package:day04_ex/ui/widgets/tab_item.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatefulWidget {
@@ -10,6 +16,7 @@ class AppState extends State<App> {
   final _navigatorKeys = {
     TabItem.home: GlobalKey<NavigatorState>(),
     TabItem.search: GlobalKey<NavigatorState>(),
+    TabItem.add: GlobalKey<NavigatorState>(),
     TabItem.favorites: GlobalKey<NavigatorState>(),
     TabItem.profile: GlobalKey<NavigatorState>(),
   };
@@ -21,8 +28,7 @@ class AppState extends State<App> {
     // for android back button
     return WillPopScope(
       onWillPop: () async {
-        final isFirstRouteInCurrentTab =
-            !await _navigatorKeys[_currentTab].currentState.maybePop();
+        final isFirstRouteInCurrentTab = !await _navigatorKeys[_currentTab].currentState.maybePop();
         if (isFirstRouteInCurrentTab) {
           if (_currentTab != TabItem.home) {
             // select 'main' tab
@@ -44,11 +50,42 @@ class AppState extends State<App> {
             _buildOffstageNavigator(TabItem.profile),
           ],
         ),
-        bottomNavigationBar: AnimatedBottomNavigationBar(
-          icons: tabIcons,
-          activeIndex: tabIndexers[_currentTab],
+        floatingActionButton: FloatingActionButton(
+          elevation: 8,
+          backgroundColor: Color(0xFFFFA400),
+          child: Icon(
+            Icons.add,
+            color: Color(0xFF373A36),
+          ),
+          onPressed: _handleAddNavigator,
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        bottomNavigationBar: AnimatedBottomNavigationBar.builder(
+          itemCount: tabIcons.length,
+          tabBuilder: (int index, bool isActive) {
+            final color = isActive ? Color(0xFFFFA400) : Colors.white;
+            return Container(
+              width: 100,
+              child: Column(
+                // mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    tabIcons[index],
+                    size: 20,
+                    color: color,
+                  ),
+                ],
+              ),
+            );
+          },
+          backgroundColor: Color(0xFF373A36),
+          activeIndex: _currentTab == TabItem.add ? -1 : tabIndexers[_currentTab],
+          splashColor: Color(0xFFFFA400),
+          splashSpeedInMilliseconds: 300,
+          notchSmoothness: NotchSmoothness.defaultEdge,
+          gapLocation: GapLocation.center,
           onTap: _selectTab,
-          //other params
         ),
       ),
     );
@@ -74,6 +111,21 @@ class AppState extends State<App> {
           navigatorKey: _navigatorKeys[tabItem],
         );
         break;
+      case TabItem.add:
+        navigator = AddNavigator(
+          navigatorKey: _navigatorKeys[tabItem],
+        );
+        break;
+      case TabItem.favorites:
+        navigator = FavoritesNavigator(
+          navigatorKey: _navigatorKeys[tabItem],
+        );
+        break;
+      case TabItem.profile:
+        navigator = ProfileNavigator(
+          navigatorKey: _navigatorKeys[tabItem],
+        );
+        break;
     }
 
     return navigator;
@@ -93,6 +145,14 @@ class AppState extends State<App> {
       _navigatorKeys[tabItem].currentState.popUntil((route) => route.isFirst);
     } else {
       setState(() => _currentTab = tabItem);
+    }
+  }
+
+  void _handleAddNavigator() {
+    if (_currentTab == TabItem.add) {
+      _navigatorKeys[TabItem.add].currentState.popUntil((route) => route.isFirst);
+    } else {
+      setState(() => _currentTab = TabItem.add);
     }
   }
 }

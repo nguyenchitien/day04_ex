@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class SearchPage extends StatelessWidget {
+class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("SearchPage"),
+        title: Text("ProfilePage"),
       ),
       body: Container(
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("SearchPage"),
+              Text("ProfilePage"),
             ],
           ),
         ),
