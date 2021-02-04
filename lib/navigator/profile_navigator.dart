@@ -1,9 +1,6 @@
+import 'package:day04_ex/routes/route_name.dart';
 import 'package:day04_ex/ui/profile/profile_page.dart';
 import 'package:flutter/material.dart';
-
-class ProfileRoutes {
-  static const String root = '/';
-}
 
 class ProfileNavigator extends StatelessWidget {
   const ProfileNavigator({this.navigatorKey});
@@ -11,7 +8,7 @@ class ProfileNavigator extends StatelessWidget {
 
   Map<String, WidgetBuilder> _routeBuilders(BuildContext context) {
     return {
-      ProfileRoutes.root: (context) => ProfilePage(),
+      RouteNames.profile: (context) => ProfilePage(),
     };
   }
 
@@ -20,7 +17,7 @@ class ProfileNavigator extends StatelessWidget {
     final routeBuilders = _routeBuilders(context);
     return Navigator(
       key: navigatorKey,
-      initialRoute: ProfileRoutes.root,
+      initialRoute: RouteNames.profile,
       onGenerateRoute: (routeSettings) {
         return MaterialPageRoute(
           builder: (context) => routeBuilders[routeSettings.name](context),

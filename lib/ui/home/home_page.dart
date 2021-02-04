@@ -1,4 +1,5 @@
 import 'package:day04_ex/navigator/home_navigator.dart';
+import 'package:day04_ex/routes/route_name.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -17,7 +18,7 @@ class HomePage extends StatelessWidget {
               FlatButton(
                 color: Colors.blueAccent,
                 onPressed: () {
-                  Navigator.of(context).pushNamed(HomeRoutes.detail);
+                  Navigator.of(context).pushNamed(RouteNames.homeDetail);
                 },
                 child: Text("Go to detail"),
               )

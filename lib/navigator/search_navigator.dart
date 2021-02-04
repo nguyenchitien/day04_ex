@@ -1,9 +1,6 @@
+import 'package:day04_ex/routes/route_name.dart';
 import 'package:day04_ex/ui/search/search_page.dart';
 import 'package:flutter/material.dart';
-
-class SearchRoutes {
-  static const String root = '/';
-}
 
 class SearchNavigator extends StatelessWidget {
   const SearchNavigator({this.navigatorKey});
@@ -11,7 +8,7 @@ class SearchNavigator extends StatelessWidget {
 
   Map<String, WidgetBuilder> _routeBuilders(BuildContext context) {
     return {
-      SearchRoutes.root: (context) => SearchPage(),
+      RouteNames.search: (context) => SearchPage(),
     };
   }
 
@@ -20,7 +17,7 @@ class SearchNavigator extends StatelessWidget {
     final routeBuilders = _routeBuilders(context);
     return Navigator(
       key: navigatorKey,
-      initialRoute: SearchRoutes.root,
+      initialRoute: RouteNames.search,
       onGenerateRoute: (routeSettings) {
         return MaterialPageRoute(
           builder: (context) => routeBuilders[routeSettings.name](context),

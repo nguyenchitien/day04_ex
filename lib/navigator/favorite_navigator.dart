@@ -1,11 +1,7 @@
+import 'package:day04_ex/routes/route_name.dart';
 import 'package:day04_ex/ui/favorites/favorite_page.dart';
 import 'package:day04_ex/ui/favorites/favorites_detail.dart';
 import 'package:flutter/material.dart';
-
-class FavoritesRoutes {
-  static const String root = '/';
-  static const String detail = '/detail';
-}
 
 class FavoritesNavigator extends StatelessWidget {
   const FavoritesNavigator({this.navigatorKey});
@@ -13,8 +9,8 @@ class FavoritesNavigator extends StatelessWidget {
 
   Map<String, WidgetBuilder> _routeBuilders(BuildContext context) {
     return {
-      FavoritesRoutes.root: (context) => FavoritePage(),
-      FavoritesRoutes.detail: (context) => FavoritesDetail(),
+      RouteNames.favorites: (context) => FavoritePage(),
+      RouteNames.favoritesDetail: (context) => FavoritesDetail(),
     };
   }
 
@@ -23,7 +19,7 @@ class FavoritesNavigator extends StatelessWidget {
     final routeBuilders = _routeBuilders(context);
     return Navigator(
       key: navigatorKey,
-      initialRoute: FavoritesRoutes.root,
+      initialRoute: RouteNames.favorites,
       onGenerateRoute: (routeSettings) {
         return MaterialPageRoute(
           builder: (context) => routeBuilders[routeSettings.name](context),

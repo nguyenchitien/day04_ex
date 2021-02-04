@@ -1,4 +1,5 @@
 import 'package:day04_ex/navigator/favorite_navigator.dart';
+import 'package:day04_ex/routes/route_name.dart';
 import 'package:flutter/material.dart';
 
 class FavoritePage extends StatelessWidget {
@@ -17,7 +18,7 @@ class FavoritePage extends StatelessWidget {
               FlatButton(
                 color: Colors.blue,
                 onPressed: () {
-                  Navigator.pushNamed(context, FavoritesRoutes.detail);
+                  Navigator.pushNamed(context, RouteNames.favoritesDetail);
                 },
                 child: Text("Go to detail"),
               )

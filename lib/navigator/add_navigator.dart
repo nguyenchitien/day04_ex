@@ -1,9 +1,6 @@
+import 'package:day04_ex/routes/route_name.dart';
 import 'package:day04_ex/ui/add/add_page.dart';
 import 'package:flutter/material.dart';
-
-class AddRoutes {
-  static const String root = '/';
-}
 
 class AddNavigator extends StatelessWidget {
   const AddNavigator({this.navigatorKey});
@@ -11,7 +8,7 @@ class AddNavigator extends StatelessWidget {
 
   Map<String, WidgetBuilder> _routeBuilders(BuildContext context) {
     return {
-      AddRoutes.root: (context) => AddPage(),
+      RouteNames.add: (context) => AddPage(),
     };
   }
 
@@ -20,7 +17,7 @@ class AddNavigator extends StatelessWidget {
     final routeBuilders = _routeBuilders(context);
     return Navigator(
       key: navigatorKey,
-      initialRoute: AddRoutes.root,
+      initialRoute: RouteNames.add,
       onGenerateRoute: (routeSettings) {
         return MaterialPageRoute(
           builder: (context) => routeBuilders[routeSettings.name](context),
